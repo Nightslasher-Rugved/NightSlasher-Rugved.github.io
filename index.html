@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Kunbi Heritage</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="nav-links" id="navLinks">
+  <!-- Buttons controlled by Firebase -->
+</div>
+
+<section class="hero">
+  <div class="container">
+    <h2>Preserving Hindu–Kunbi Culture & Values</h2>
+    <p>A respectful platform to connect our community, traditions, and heritage.</p>
+    <a href="signup.html" class="btn">Join Our Community</a>
+  </div>
+</section>
+
+<section class="content container">
+  <div class="card">
+    <h3>Our Values</h3>
+    <p>Dharma, unity, hard work, and respect for tradition.</p>
+  </div>
+  <div class="card">
+    <h3>Our Roots</h3>
+    <p>Kunbi culture is deeply connected to agriculture, nature, and faith.</p>
+  </div>
+  <div class="card">
+    <h3>Our Community</h3>
+    <p>Connecting Kunbi people across villages and states.</p>
+  </div>
+</section>
+
+<footer class="footer">
+  <p>Made with respect for Kunbi Samaj 🕉️</p>
+</footer>
+
+<!-- 🔥 FIREBASE AUTH NAV CONTROL -->
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut } 
+from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDHHo0tXCOSFU0ZrQ0t1gjM6oPo-i0w2rI",
+  authDomain: "kunbi-heritage.firebaseapp.com",
+  projectId: "kunbi-heritage",
+  storageBucket: "kunbi-heritage.firebasestorage.app",
+  messagingSenderId: "973069944697",
+  appId: "1:973069944697:web:62e432033a7e975f2f11a8"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+const navLinks = document.getElementById("navLinks");
+
+onAuthStateChanged(auth, (user) => {
+
+  if (user) {
+
+    const name = user.displayName || "Member";
+
+    navLinks.innerHTML = `
+      <span style="margin-right:10px;">🙏 ${name}</span>
+      <a href="chat.html" class="btn-small">Open Chat</a>
+      <a href="#" class="btn-outline" id="logoutBtn">Logout</a>
+    `;
+
+    document.getElementById("logoutBtn").onclick = async () => {
+      await signOut(auth);
+      window.location.href = "index.html";
+    };
+
+  } else {
+
+    navLinks.innerHTML = `
+      <a href="signup.html" class="btn-small">Join</a>
+      <a href="login.html" class="btn-outline">Login</a>
+    `;
+
+  }
+
+});
+
+</script>
+
+</body>
+</html>
