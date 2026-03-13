@@ -74,6 +74,7 @@ header {
 }
 
 .btn-small {
+  text-decoration: none;
   animation: none;
   background: #e76f00;
   color: white;
@@ -246,3 +247,4 @@ form select {
   color: white;
   cursor: pointer;
 }
+
