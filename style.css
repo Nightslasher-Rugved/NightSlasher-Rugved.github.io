@@ -74,12 +74,14 @@ header {
 }
 
 .btn-small {
-  text-decoration: none;
+  text-decoration: none !important;
   background: #e76f00;
   color: white;
   padding: 8px 16px;
-  border-radius: 6px;
+  border-radius: 999px;
+  display: inline-block;
 }
+
 .nav-buttons a:hover {
   transform: translateY(-2px);
   box-shadow: 0 10px 20px rgba(255, 140, 0, 0.25);
@@ -246,5 +248,6 @@ form select {
   color: white;
   cursor: pointer;
 }
+
 
 
