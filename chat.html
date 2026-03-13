@@ -69,7 +69,7 @@ onAuthStateChanged(auth, (user) => {
   }
 
   currentUser = user;
-  userInfo.innerText = "Logged in as: " + user.email;
+userInfo.innerText = "Logged in as: " + (user.displayName || user.email);
 
   loadMessages();
 });
@@ -86,7 +86,7 @@ window.sendMessage = async function(event) {
   if (text === "") return;
 
   await addDoc(collection(db, "messages"), {
-    name: currentUser.email,
+    name: currentUser.displayName || currentUser.email,
     uid: currentUser.uid,
     text: text,
     time: Date.now()
@@ -173,3 +173,4 @@ function loadMessages() {
 
 </body>
 </html>
+
